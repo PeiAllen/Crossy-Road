@@ -1,0 +1,29 @@
+
+<canvas id="canvas" style="border:1px solid #000000;"></canvas>
+
+
+
+
+
+
+
+<script>var canvas = document.getElementById("canvas");
+    var y=document.body.clientHeight-20;
+    var x=document.body.clientWidth-20;
+canvas.width  = x;
+canvas.height = y;
+    var ctx = canvas.getContext("2d");
+    ctx.fillStyle="#A9A9A9";
+    ctx.fillRect(0,y/2-300,x,300);
+    ctx.strokeStyle="#FFFF00";
+    ctx.setLineDash([5, 3]);
+    ctx.beginPath();
+    ctx.moveTo(0,y/2-200);
+    ctx.lineTo(x,y/2-200);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0,y/2-100);
+    ctx.lineTo(x,y/2-100);
+    ctx.stroke();
+    
+</script>
