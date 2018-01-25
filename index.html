@@ -5,16 +5,40 @@
    style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
  <canvas id="layer3" width="100" height="100" 
    style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+<canvas id="layer4" width="100" height="100" 
+   style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+<canvas id="layer5" width="100" height="100" 
+   style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
+<canvas id="layer6" width="100" height="100" 
+   style="position: absolute; left: 0; top: 0; z-index: 2;"></canvas>
 <img src="smiley-1635458_1280.png" id="face">
+<img src="smiley-1635450_1280.png" id="face2">
+<img src="tack-car-top-view-hi.jpg" id="car1">
+<img src="car-clipart-top-down-view-4.jpg" id="car2">
+<img src="car-clipart-top-view-transparent-6.jpg" id="car3">
 <script>
     window.onload = function() {
     var canvas = document.getElementById("layer1");
     var canvas2 = document.getElementById("layer2");
-        var canvas3 = document.getElementById("layer2");
+        var canvas3 = document.getElementById("layer3");
+            var canvas4 = document.getElementById("layer4");
+            var canvas5 = document.getElementById("layer5");
+         var canvas6 = document.getElementById("layer6");
     var img=document.getElementById("face");
-    console.log(img);
+        var img2=document.getElementById("face2");
+        var car1=document.getElementById("car1");
+        var car2=document.getElementById("car2");
+        var car3=document.getElementById("car3");
     img.width=0;
     img.length=0;
+        img2.width=0;
+    img2.length=0;
+            car1.width=0;
+    car1.length=0;
+            car2.width=0;
+    car2.length=0;
+            car3.width=0;
+    car3.length=0;
     var y=document.body.clientHeight;
     var x=document.body.clientWidth;
 canvas.width  = x;
@@ -23,12 +47,21 @@ canvas2.width  = x;
 canvas2.height = y;
         canvas3.width  = x;
 canvas3.height = y;
+        canvas4.width  = x;
+canvas4.height = y;
+        canvas5.width  = x;
+canvas5.height = y;
+                canvas6.width  = x;
+canvas6.height = y;
+        var score=20;
     var cx=x/2;
     var cy=y-100;
     var ctx = canvas.getContext("2d");
         var ctx2 = canvas2.getContext("2d");
         var ctx3 = canvas3.getContext("2d");
-    console.log(img);
+        var ctx4 = canvas4.getContext("2d");
+        var ctx5 = canvas5.getContext("2d");
+        var ctx6 = canvas6.getContext("2d");
     ctx.fillStyle="#A9A9A9";
     ctx.fillRect(0,y/2-300,x,300);
     ctx.strokeStyle="#FFFF00";
@@ -41,22 +74,116 @@ canvas3.height = y;
     ctx.moveTo(0,y/2-100);
     ctx.lineTo(x,y/2-100);
     ctx.stroke();
-    ctx2.drawImage(img,cx,cy,50,50);
-        var movement=20;
-    document.addEventListener("keydown", function (event) {
-        ctx2.clearRect(0, 0, x, y);
-        if(event.keyCode == 37){
-    ctx2.drawImage(img,cx-=movement,cy,50,50);
+        ctx6.font = "30px Arial";
+        ctx6.fillText("Score:"+score,x-125,30); 
+    ctx2.drawImage(img2,cx,cy,50,50);
+        var movement=5;
+        var carx = [0,0,0];
+        var cary = [y/2-275,y/2-175,y/2-75];
+        var carinterval= [50,70,60];
+        var random=Math.random()*(2+(score));
+        cx=300;
+            cy=y/2-275;
+        carx[0]=-500;
+        carx[1]=-500;
+        carx[2]=-500;
+        setInterval(function(){
+            for(var i=0;i<100000;i++){
+                if(cy<=cary[0]+49&&cy>=cary[0]-49){
+                   if(cx<=carx[0]+49&&cx>=carx[0]-49){
+                   ctx2.clearRect(0, 0, x, y);
+                   ctx2.drawImage(img,cx=x/2,cy=y-100,50,50);  
+                       ctx6.clearRect(0, 0, x, y);
+                        score=0;
+             ctx6.fillText("Score:"+score,x-125,30); 
+                       random=Math.random()*(2+(score));
+                   }
+                   }
+                else if(cy<=cary[1]+49&&cy>=cary[1]-49){
+                   if(cx<=carx[1]+49&&cx>=carx[1]-49){
+                       ctx2.clearRect(0, 0, x, y);
+                   ctx2.drawImage(img,cx=x/2,cy=y-100,50,50);
+                       ctx6.clearRect(0, 0, x, y);
+                       score=0;
+             ctx6.fillText("Score:"+score,x-125,30);
+                       random=Math.random()*(2+(score));
+                   }
+                   }
+                else if(cy<=cary[2]+49&&cy>=cary[2]-49){
+                   if(cx<=carx[2]+49&&cx>=carx[2]-49){
+                       ctx2.clearRect(0, 0, x, y);
+                   ctx2.drawImage(img,cx=x/2,cy=y-100,50,50);
+                        score=0;
+                       ctx6.clearRect(0, 0, x, y);
+             ctx6.fillText("Score:"+score,x-125,30);  
+                       random=Math.random()*(2+(score));
+                   }
+                   }
+            }
+            }, 0);
+    setInterval(function(){
+        for(var i=0;i<(score+1);i++){
+    ctx3.clearRect(0, 0, x, y);
+        if(carx[0]+movement>=x){
+                carx[0]-=x;
+            }
+    ctx3.drawImage(car1,carx[0]+=movement,cary[0],50,50);
         }
-        else if(event.keyCode==38){
+    }, carinterval[0]/random);
+        setInterval(function(){
+            for(var i=0;i<(score+1);i++){
+             ctx4.clearRect(0, 0, x, y);
+            if(carx[1]+movement>=x){
+                carx[1]-=x;
+            }
+    ctx4.drawImage(car2,carx[1]+=movement,cary[1],50,50);
+        }
+    }, carinterval[1]/random);
+        setInterval(function(){
+            for(var i=0;i<(score+1);i++){
+             ctx5.clearRect(0, 0, x, y);
+            if(carx[2]+movement>=x){
+                carx[2]-=x;
+            }
+    ctx5.drawImage(car3,carx[2]+=movement,cary[2],50,50);
+            }
+    }, carinterval[2]/random);
+    document.addEventListener("keydown", function (event) {
+        for(var i=0;i<2;i++){
+        if(event.keyCode == 37||event.keyCode==65){
+            if(cx-movement>=0){
+            ctx2.clearRect(0, 0, x, y);
+    ctx2.drawImage(img,cx-=movement,cy,50,50);
+            }
+        }
+        else if(event.keyCode==38||event.keyCode==87){
+                        if(cy-movement<=-49){
+                cy=y-95;
+              ctx6.clearRect(0, 0, x, y);
+             ctx6.fillText("Score:"+(score+=1),x-125,30); 
+                            random=Math.random()*(2+(score));
+            }
+            ctx2.clearRect(0, 0, x, y);
            ctx2.drawImage(img,cx,cy-=movement,50,50); 
         }
-        else if(event.keyCode==39){
+        else if(event.keyCode==39||event.keyCode==68){
+            if(cx+movement+49<x){
+            ctx2.clearRect(0, 0, x, y);
 ctx2.drawImage(img,cx+=movement,cy,50,50);
+            }
         }
-        else if(event.keyCode==40){
-           ctx2.drawImage(img,cx,cy+=movement,50,50); 
+        else if(event.keyCode==40||event.keyCode==83){
+            if(cy+movement+49<y){
+             ctx2.clearRect(0, 0, x, y);
+           ctx2.drawImage(img,cx,cy+=movement,50,50);   
+            }
+        }
         }
 });
+    document.addEventListener("keyup", function (event) {
+        ctx2.clearRect(0, 0, x, y);
+        ctx2.drawImage(img2,cx,cy,50,50); 
+});
+
     }
 </script>
